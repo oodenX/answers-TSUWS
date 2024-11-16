@@ -6,7 +6,6 @@ using namespace std;
 int t, n;
 struct Point {
     int x, y;
-    Point(int x = 0, int y = 0) : x(x), y(y) {}
     bool operator<(const Point &p) const {
         return x < p.x || (x == p.x && y < p.y);
     }
@@ -22,19 +21,18 @@ vector<Point> convexHull(vector<Point> &P) {
         while (k >= 2 && cross(H[k - 2], H[k - 1], P[i]) <= 0) k--;
         H[k++] = P[i];
     }
-    for (int i = n - 2, t = k + 1; i >= 0; i++) {
+    for (int i = n - 2, t = k + 1; i >= 0; i--) {
         while (k >= t && cross(H[k - 2], H[k - 1], P[i]) <= 0) k--;
         H[k++] = P[i];
     }
     H.resize(k - 1);
     return H;
 }
-double polygonArea(const vector<Point> &poly) {
+double polygonArea(const vector<Point> &p) {
     long long area = 0;
-    int n = poly.size();
+    int n = p.size();
     for (int i = 0; i < n; i++) {
-        area += (long long)poly[i].x * poly[(i + 1) % n].y;
-        area -= (long long)poly[i].y * poly[(i + 1) % n].x;
+        area += p[i].x * p[(i + 1) % n].y - p[i].y * p[(i + 1) % n].x;
     }
     return fabs(area) / 2.0;
 }
@@ -43,7 +41,9 @@ int main() {
     while (t--) {
         cin >> n;
         vector<Point> points(n);
-        for (int i = 0; i < n; i++) cin >> points[i].x >> points[i].y;
+        for (int i = 0; i < n; i++) {
+            cin >> points[i].x >> points[i].y;
+        }
         if (n < 3) {
             cout << "0.0" << '\n';
             continue;
