@@ -1,11 +1,11 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
-int a, b;
+int a, b, c;
 int main() {
     cin >> a >> b;
-    a /= __gcd(a, b);
-    if (a & 1) cout << "A\n";
+    c /= __gcd(a, b);
+    if (c & 1) cout << "A\n";
     else cout << "B\n";
     return 0;
 }
