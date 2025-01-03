@@ -21,10 +21,10 @@ int main() {
             for (int i = 0; i < n; i++)
                 for (int j = 0; j < n; j++)
                     e[i][j] = max(e[i][j], e[i][k] * e[k][j]);
-        bool mark = 0;
+        bool mark = false;
         for (int i = 0; i < n; i++) {
             if (e[i][i] > 1) {
-                mark = 1;
+                mark = true;
                 break;
             }
         }
